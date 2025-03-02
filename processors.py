@@ -24,6 +24,7 @@ class TwitterFeedProcessor:
         entities = tweet.get("entities", {})
 
         # Process URLs
+        # if the media url is in the test remove it
         if "urls" in entities:
             for url_dict in entities["urls"]:
                 if not url_dict["expanded_url"].startswith("https://twitter.com/"):
@@ -62,7 +63,7 @@ class TwitterFeedProcessor:
         """Process a single tweet into a ContentItem"""
         # Extract text and URLs
         clean_text, embedded_urls, media_urls = self._extract_urls(tweet)
-        embeded_image = media_urls[0] if media_urls else None
+        embeded_image = media_urls[0] if media_urls and len(media_urls) == 1 else None
         embeded_url = embedded_urls[0] if embedded_urls else None
 
         print(f"{embeded_image}, {embeded_url}")
@@ -106,4 +107,5 @@ class TwitterFeedProcessor:
             post_id=None,
             parent_id=tweet.get("in_reply_to_status_id_str"),
             title=None,
+            embeded_images=media_urls if media_urls and len(media_urls) > 1 else None
         )

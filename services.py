@@ -18,7 +18,7 @@ class TweetService:
         """Load tweets from file into memory."""
         try:
             with open(self.file_path, "r", encoding="utf-8") as fp:
-                raw_tweets = json.load(fp)["data"][:5]
+                raw_tweets = json.load(fp)["data"][:100]
 
             processor = TwitterFeedProcessor()
             tweets = [
@@ -44,6 +44,10 @@ class TweetService:
 
                 item["retweet_by"] = item.get("retweet_by", "")
                 item["quoted_by"] = item.get("quoted_by", "")
+                if item["embeded_images"]:
+                    for i, url in enumerate(item["embeded_images"]):
+                        item["embeded_images"][i] =  str(url)
+
 
             return tweets
 

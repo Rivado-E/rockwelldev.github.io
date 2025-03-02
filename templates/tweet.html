@@ -1,4 +1,4 @@
-<div class="tweet bg-[#f5e6da] p-4 rounded-lg border border-gray-700 shadow-sm text-black">
+<div class="tweet bg-[#f5e6da] p-4 rounded-lg border border-gray-700 shadow-sm text-black" id={{tweet.id}}>
     <!-- Retweeted Banner -->
     {% if tweet.engagements.retweet_by %}
         <div class="text-gray-500 text-sm">Retweeted by: <b>{{ tweet.engagements.retweet_by }}</b></div>
@@ -28,9 +28,20 @@
     <!-- Tweet Content -->
     <p class="mt-2 text-gray-800">{{ tweet.body }}</p>
 
-    {% if tweet.image_url %}
-        <img src="{{ tweet.image_url }}" class="mt-3 rounded-lg border border-gray-300">
+    <!-- Tweet Images add all of them in a grid but before that add the links up but make sure there are not the same as in media -->
+    {% if tweet.embeded_image %}
+        <img src="{{ tweet.embeded_image }}" class="mt-3 rounded-lg border border-gray-300">
     {% endif %}
+
+    {% if tweet.embeded_images %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+            {% for image_url in tweet.embeded_images %}
+                <img src="{{ image_url }}" class="rounded-lg border w-full h-auto object-cover">
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
 
     <!-- Tweet Footer (Like & Retweet) -->
     <div class="mt-3 flex justify-between border-t border-gray-400 pt-3">

@@ -114,6 +114,7 @@ class ContentItem(BaseModel):
     engagements: Union[TwitterEngagements, RedditEngagements, FacebookEngagements] = (
         Field(description="Engagement counts for the content item.")
     )
+    embeded_images: Optional[list[HttpUrl]] = Field()
 
 
 class Session(BaseModel):

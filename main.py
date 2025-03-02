@@ -24,7 +24,7 @@ async def home(request: Request):
 @app.get("/feed", response_model=list)
 async def get_feed():
     """Returns the processed tweet feed."""
-    return JSONResponse(tweet_service.get_tweets())
+    return JSONResponse(tweet_service.get_tweets())  
 
 
 @app.post("/like/{tweet_id}")
@@ -43,3 +43,5 @@ async def retweet_tweet(request: Request, tweet_id: int):
     return templates.TemplateResponse(
         "retweet_button.html", {"request": request, "tweet": tweet}
     )
+
+# add endpoints for 
