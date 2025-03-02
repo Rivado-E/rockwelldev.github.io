@@ -66,7 +66,7 @@ class TwitterFeedProcessor:
         embeded_image = media_urls[0] if media_urls and len(media_urls) == 1 else None
         embeded_url = embedded_urls[0] if embedded_urls else None
 
-        print(f"{embeded_image}, {embeded_url}")
+        # print(f"{embeded_image}, {embeded_url}")
         # raise ValueError (f"{embeded_url}, {embeded_image}")
 
         # Determine if it's a reply

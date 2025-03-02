@@ -43,5 +43,3 @@ async def retweet_tweet(request: Request, tweet_id: int):
     return templates.TemplateResponse(
         "retweet_button.html", {"request": request, "tweet": tweet}
     )
-
-# add endpoints for 
